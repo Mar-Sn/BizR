@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
+using BizR.Into;
 
-namespace BizR
+namespace BizR.Rules
 {
     public interface IBusinessRules<TIn, TOut> where TIn : class where TOut: class
     {

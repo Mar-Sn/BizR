@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BizR
+namespace BizR.HandlerRegister
 {
     internal interface IRegisterHandlerInternal
     {

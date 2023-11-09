@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BizR
+namespace BizR.Handler
 {
     public abstract class Handler<TIn, TOut> : IHandler where TIn : class
     {

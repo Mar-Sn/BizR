@@ -1,6 +1,7 @@
 ﻿using System;
+using BizR.Rules;
 
-namespace BizR
+namespace BizR.Factory
 {
     public class BusinessFactory: IBusinessFactory
     {

@@ -1,6 +1,7 @@
 ﻿using System;
+using BizR.HandlerRegister;
 
-namespace BizR
+namespace BizR.Mapping
 {
     public interface IMappable<TOriginal, TOriginalOut, TIntermediate> where TIntermediate : class where TOriginal : class where TOriginalOut : class
     {

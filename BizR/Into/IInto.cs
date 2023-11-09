@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
+using BizR.Mapping;
 
-namespace BizR
+namespace BizR.Into
 {
     public interface IInto<TOriginal, TOriginalOut, TIntermediate> where TIntermediate : class where TOriginal : class where TOriginalOut : class
     {

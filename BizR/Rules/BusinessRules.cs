@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BizR.Handler;
+using BizR.Into;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BizR
+namespace BizR.Rules
 {
     public class BusinessRules<TIn, TOut> : IBusinessRules<TIn, TOut> where TIn : class where TOut : class
     {

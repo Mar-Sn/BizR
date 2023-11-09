@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BizR
+namespace BizR.Handler
 {
     internal interface IHandler
     {

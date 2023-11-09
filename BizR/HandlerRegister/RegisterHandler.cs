@@ -1,6 +1,7 @@
 ﻿using System;
+using BizR.Handler;
 
-namespace BizR
+namespace BizR.HandlerRegister
 {
     public class RegisterHandler<TOriginal, TOriginalOut, TIntermediate> :
         IRegisterHandler<TOriginal, TOriginalOut, TIntermediate>, IRegisterHandlerInternal

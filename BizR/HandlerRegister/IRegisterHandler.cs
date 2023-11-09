@@ -1,4 +1,6 @@
-﻿namespace BizR
+﻿using BizR.Handler;
+
+namespace BizR.HandlerRegister
 {
     public interface IRegisterHandler<TOriginal, TOriginalOut, TIntermediate> where TIntermediate : class where TOriginal : class where TOriginalOut : class
     {

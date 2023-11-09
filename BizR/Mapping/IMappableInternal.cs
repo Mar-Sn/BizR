@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BizR.HandlerRegister;
 
-namespace BizR
+namespace BizR.Mapping
 {
     internal interface IMappableInternal<in T>
     {

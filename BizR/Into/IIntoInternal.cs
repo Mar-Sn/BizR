@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq.Expressions;
 
-namespace BizR
+namespace BizR.Into
 {
     internal interface IIntoInternal<in T>
     {

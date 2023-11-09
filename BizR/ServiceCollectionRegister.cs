@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BizR.Factory;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BizR
 {

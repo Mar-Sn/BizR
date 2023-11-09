@@ -1,4 +1,7 @@
 ﻿using BizR;
+using BizR.Factory;
+using BizR.Handler;
+using BizR.Rules;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;

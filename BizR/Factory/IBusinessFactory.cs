@@ -1,4 +1,6 @@
-﻿namespace BizR
+﻿using BizR.Rules;
+
+namespace BizR.Factory
 {
     public interface IBusinessFactory
     {
