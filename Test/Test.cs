@@ -25,7 +25,7 @@ public class Test
             .Create<TestInput, TestOutput>()
             .RuleFor<TestNotNull>(i => i
                 .When(e => e.Test != null)
-                .Map(e => new TestNotNull(e.Test!))
+                .Map(_ => new TestNotNull())
                 .WithHandler<TestNotNullHandler>()) //TODO This might not be needed??
             .RuleFor<TestIsNull>(i => i
                 .When(e => e.Test == null)
@@ -34,17 +34,24 @@ public class Test
     }
 
     [Test]
-    public async Task TestMethod()
+    public async Task TestWithInput()
     {
         var result = await _rules.Execute(new TestInput("sometest"));
-        result.Success.Should().BeTrue();
+        result.Success.Should().Be(1);
+    }
+    
+    [Test]
+    public async Task TestWithNull()
+    {
+        var result = await _rules.Execute(new TestInput(null));
+        result.Success.Should().Be(2);
     }
 
     private class TestNotNullHandler : Handler<TestNotNull, TestOutput>
     {
         public override Task<TestOutput> Handle(TestNotNull input)
         {
-            return Task.FromResult(new TestOutput(true));
+            return Task.FromResult(new TestOutput(1));
         }
     }
 
@@ -52,15 +59,15 @@ public class Test
     {
         public override Task<TestOutput> Handle(TestIsNull input)
         {
-            return Task.FromResult(new TestOutput(true));
+            return Task.FromResult(new TestOutput(2));
         }
     }
 
-    private record TestNotNull(string Test);
+    private record TestNotNull;
 
     private record TestIsNull;
 
     private record TestInput(string? Test);
 
-    private record TestOutput(bool Success);
+    private record TestOutput(int Success);
 }

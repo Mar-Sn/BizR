@@ -1,17 +1,24 @@
-﻿namespace BizR
-{
-    public class RegisterHandler<TOriginal, TOriginalOut, TIntermediate>: IRegisterHandler<TOriginal, TOriginalOut, TIntermediate> where TIntermediate : class where TOriginal : class where TOriginalOut : class
-    {
-        private readonly BusinessRules<TOriginal, TOriginalOut> _businessRules;
+﻿using System;
 
-        public RegisterHandler(BusinessRules<TOriginal, TOriginalOut> businessRules)
+namespace BizR
+{
+    public class RegisterHandler<TOriginal, TOriginalOut, TIntermediate> :
+        IRegisterHandler<TOriginal, TOriginalOut, TIntermediate>, IRegisterHandlerInternal
+        where TIntermediate : class
+        where TOriginal : class
+        where TOriginalOut : class
+    {
+        private Type? _handler;
+
+        public void WithHandler<T>() where T : Handler<TIntermediate, TOriginalOut>
         {
-            _businessRules = businessRules;
+            _handler = typeof(T);
         }
 
-        public IBusinessRules<TOriginal, TOriginalOut> WithHandler<T>() where T : Handler<TIntermediate, TOriginalOut>
+
+        public Type HandlerType()
         {
-            return _businessRules;
+            return _handler  ?? throw new ArgumentException("no handler was registered");
         }
     }
 }

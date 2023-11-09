@@ -3,22 +3,16 @@ using System.Linq.Expressions;
 
 namespace BizR
 {
-    public class Into<TOriginal, TOriginalOut, TIntermediate> : IInto<TOriginal, TOriginalOut, TIntermediate>, 
+    public class Into<TOriginal, TOriginalOut, TIntermediate> : IInto<TOriginal, TOriginalOut, TIntermediate>,
         IIntoInternal<TOriginal> where TIntermediate : class where TOriginal : class where TOriginalOut : class
     {
-        private readonly BusinessRules<TOriginal, TOriginalOut> _businessRules;
         private Func<TOriginal, bool>? _predicate;
-        private Mappable<TOriginal,TOriginalOut,TIntermediate> _mapper;
-
-        public Into(BusinessRules<TOriginal, TOriginalOut> businessRules)
-        {
-            _businessRules = businessRules;
-        }
+        private Mappable<TOriginal, TOriginalOut, TIntermediate>? _mapper;
 
         public IMappable<TOriginal, TOriginalOut, TIntermediate> When(Expression<Func<TOriginal, bool>> predicate)
         {
             _predicate = predicate.Compile();
-            _mapper = new Mappable<TOriginal, TOriginalOut, TIntermediate>(_businessRules);
+            _mapper = new Mappable<TOriginal, TOriginalOut, TIntermediate>();
             return _mapper;
         }
 
@@ -29,12 +23,13 @@ namespace BizR
 
         public object Map(TOriginal obj)
         {
-            return _mapper.Map(obj);
+            return _mapper?.Map(obj) ?? throw new ArgumentException("no mapper was registered");
         }
 
         public Type Handler()
         {
-            throw new NotImplementedException();
+            return (_mapper as IMappableInternal<TOriginal> ?? throw new ArgumentException("no mapper was registered"))
+                .Handler().HandlerType();
         }
     }
 }

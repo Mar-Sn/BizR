@@ -18,7 +18,7 @@ namespace BizR
 
         public IBusinessRules<TIn, TOut> RuleFor<T>(Action<IInto<TIn, TOut, T>> rule) where T : class
         {
-            var into = new Into<TIn, TOut, T>(this);
+            var into = new Into<TIn, TOut, T>();
             rule(into);
             _rules.Add(typeof(T), into);
             return this;
