@@ -35,7 +35,7 @@ private class AHandler : Handler<A, Output>
     
     public override Task<Output> Handle(A input)
     {
-        return Task.FromResult(new Output(Success = true));
+        return Task.FromResult(new Output(Success: true));
     }
 }
 ```
