@@ -19,10 +19,10 @@ public class Test
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddBizR();
         serviceCollection.AddTransient<TestNotNullHandler>(); //TODO must be a nicer way
-        serviceCollection.AddTransient<TestIsNullHandler>();//TODO must be a nicer way
+        serviceCollection.AddTransient<TestIsNullHandler>(); //TODO must be a nicer way
 
         var services = serviceCollection.BuildServiceProvider();
-        
+
         var factory = services.GetRequiredService<IBusinessFactory>(); //TODO replace with real factory
         _rules = factory
             .Create<TestInput, TestOutput>()
@@ -42,7 +42,7 @@ public class Test
         var result = await _rules.Execute(new TestInput("sometest"));
         result.Success.Should().Be(1);
     }
-    
+
     [Test]
     public async Task TestWithNull()
     {
