@@ -13,7 +13,7 @@ var rules = factory
     .Create<Input, Output>()
     .RuleFor<A>(x => x
         .When(e => e.SomeCondition == true)
-        .Map(_ => new A("A", e.SomeCondition))
+        .Map(e => new A("A", e.SomeCondition))
         .WithHandler<AHandler>()) 
     .RuleFor<B>(x => x
         .When(e => e.SomeCondition == false)
