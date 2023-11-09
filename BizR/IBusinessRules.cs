@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 
 namespace BizR
 {
-    public interface IBusinessRules<TIn, TOut>
+    public interface IBusinessRules<TIn, TOut> where TIn : class where TOut: class
     {
-        public IBusinessRules<TIn, TOut> RuleFor<T>(Action<IInto<TIn, TOut, T>> rule);
-        public void WithHandler<T>() where T : IHandler<TIn, TOut>;
+        public IBusinessRules<TIn, TOut> RuleFor<T>(Action<IInto<TIn, TOut, T>> rule) where T : class;
         public Task<TOut> Execute(TIn input);
     }
 }

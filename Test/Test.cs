@@ -1,5 +1,6 @@
 ﻿using BizR;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
 namespace Test;
@@ -12,7 +13,14 @@ public class Test
     [SetUp]
     public void Init()
     {
-        var factory = Mock.Of<IBusinessFactory>(); //TODO replace with real factory
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddBizR();
+        serviceCollection.AddTransient<TestNotNullHandler>(); //TODO must be a nicer way
+        serviceCollection.AddTransient<TestIsNullHandler>();//TODO must be a nicer way
+
+        var services = serviceCollection.BuildServiceProvider();
+        
+        var factory = services.GetRequiredService<IBusinessFactory>(); //TODO replace with real factory
         _rules = factory
             .Create<TestInput, TestOutput>()
             .RuleFor<TestNotNull>(i => i
@@ -32,17 +40,17 @@ public class Test
         result.Success.Should().BeTrue();
     }
 
-    private class TestNotNullHandler : IHandler<TestNotNull, TestOutput>
+    private class TestNotNullHandler : Handler<TestNotNull, TestOutput>
     {
-        public Task<TestOutput> Handle(TestNotNull input)
+        public override Task<TestOutput> Handle(TestNotNull input)
         {
             return Task.FromResult(new TestOutput(true));
         }
     }
 
-    private class TestIsNullHandler : IHandler<TestIsNull, TestOutput>
+    private class TestIsNullHandler : Handler<TestIsNull, TestOutput>
     {
-        public Task<TestOutput> Handle(TestIsNull input)
+        public override Task<TestOutput> Handle(TestIsNull input)
         {
             return Task.FromResult(new TestOutput(true));
         }

@@ -2,8 +2,8 @@
 
 namespace BizR
 {
-    public interface IMappable<TOriginal, TOriginalOut, TIntermediate>
+    public interface IMappable<TOriginal, TOriginalOut, TIntermediate> where TIntermediate : class where TOriginal : class where TOriginalOut : class
     {
-        public IBusinessRules<TIntermediate, TOriginalOut> Map(Func<TOriginal, TIntermediate> map);
+        public IRegisterHandler<TOriginal, TOriginalOut, TIntermediate> Map(Func<TOriginal, TIntermediate> map);
     }
 }

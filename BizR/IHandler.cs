@@ -2,8 +2,8 @@
 
 namespace BizR
 {
-    public interface IHandler<TIn, TOut>
+    internal interface IHandler
     {
-          public Task<TOut> Handle(TIn input);
+        Task<object> HandleInternal(object input);
     }
 }
